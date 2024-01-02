@@ -19,5 +19,5 @@ async def root():
 async def shorten_text(item: Item):
     original_text = str(item).replace("  ", " ").strip()
     summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
-    short_text = summarizer(original_text, do_sample=False)
+    short_text = summarizer(original_text, max_length=130, min_length=14, do_sample=False)
     return {"short_text": short_text[0]["summary_text"]}
